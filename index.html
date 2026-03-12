@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Aaryan · Arul · Eathan — Ebooks</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f5f5f5;
+      margin: 0;
+      padding: 0;
+    }
+
+    header {
+      background: #222;
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+
+    /* HOME PAGE */
+    #home {
+      padding: 20px;
+      max-width: 900px;
+      margin: auto;
+      display: block;
+    }
+
+    .ebook-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+    }
+
+    .ebook-card {
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+
+    .ebook-card h3 {
+      margin-top: 0;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 10px 15px;
+      background: #222;
+      color: white;
+      text-decoration: none;
+      border-radius: 6px;
+      margin-top: 10px;
+      cursor: pointer;
+    }
+
+    .btn:hover {
+      background: #444;
+    }
+
+    /* READER */
+    #reader {
+      display: none;
+      max-width: 700px;
+      margin: 30px auto;
+      background: white;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    }
+
+    .page {
+      display: none;
+      white-space: pre-line;
+      font-size: 18px;
+      line-height: 1.6;
+    }
+
+    .page.active {
+      display: block;
+    }
+
+    .buttons {
+      margin-top: 20px;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+      border: none;
+      background: #222;
+      color: white;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    button:disabled {
+      background: #777;
+      cursor: not-allowed;
+    }
+
+    #backHome {
+      margin-bottom: 20px;
+      cursor: pointer;
+      color: #222;
+      font-size: 16px;
+      text-decoration: none;
+      display: inline-block;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>Aaryan · Arul · Eathan — Ebooks</h1>
+  <p>Click a book to start reading</p>
+</header>
+
+<!-- HOME PAGE -->
+<div id="home">
+  <div class="ebook-grid">
+
+    <div class="ebook-card">
+      <h3>Linda in Trimpton Forest</h3>
+      <p>By Aaryan</p>
+      <p>A spooky adventure about a girl who survives a plane crash and meets a ghost.</p>
+      <div class="btn" onclick="openBook()">Read Book</div>
+    </div>
+
+  </div>
+</div>
+
+<!-- READER -->
+<div id="reader">
+
+  <div id="backHome" onclick="goHome()">← Back to Library</div>
+
+  <h1>Linda in Trimpton Forest</h1>
+
+  <!-- PAGE 1 -->
+  <div class="page active" id="page1">
+On a dark night, a white Hengtons private jet was flying in the cloudy sky above Trimpton Forest. People believe that strange animals and creatures live there.
+
+Just when the ride was going smooth, suddenly, the jet’s loud alarm went off. The plane was crashing!
+
+Pilots and the Hengtons couldn't survive, except for Linda Hengton, the youngest member of the Hengton Family.
+
+Unfortunately young Linda was crying of the death of her mom, dad, uncle, aunty, and sadly her loved grandpa too.
+
+1
+  </div>
+
+  <!-- PAGE 2 -->
+  <div class="page" id="page2">
+When Linda fell out of her parachute, she blinked, looked around, and felt unconscious.
+
+When she opened her eyes, there was a big house in front of her. She tried to go inside but the door was locked.
+
+When she came at the back the door was open. The door creaked open, and she went inside — it was all dark with spooky items. The house looked abandoned.
+
+She went upstairs and entered a room. A spooky white flash swooshed behind her. Just when she turned to look behind, it disappeared! She was enormously frightened.
+
+At that moment, the door shut behind her. Although she was scared, she tried to open the door but regrettably it was locked.
+
+She tried to open the window — luckily, the window was unlocked. She jumped on a pile of leaves but just at that time she heard a soft spooky sound coming from the back.
+
+She hid in the leaves and waited for the sound to come. It was a ghost named Shadow. He was one of the dangerous ghosts on earth.
+  </div>
+
+  <div class="buttons">
+    <button id="prevBtn" disabled>Previous</button>
+    <button id="nextBtn">Next</button>
+  </div>
+
+</div>
+
+<script>
+let page = 1;
+
+const pages = {
+  1: document.getElementById("page1"),
+  2: document.getElementById("page2")
+};
+
+const prevBtn = document.getElementById("prevBtn");
+const nextBtn = document.getElementById("nextBtn");
+
+function openBook() {
+  document.getElementById("home").style.display = "none";
+  document.getElementById("reader").style.display = "block";
+}
+
+function goHome() {
+  document.getElementById("reader").style.display = "none";
+  document.getElementById("home").style.display = "block";
+  page = 1;
+  updatePages();
+}
+
+function updatePages() {
+  pages[1].classList.remove("active");
+  pages[2].classList.remove("active");
+
+  pages[page].classList.add("active");
+
+  prevBtn.disabled = page === 1;
+  nextBtn.disabled = page === 2;
+}
+
+prevBtn.onclick = () => {
+  if (page > 1) page--;
+  updatePages();
+};
+
+nextBtn.onclick = () => {
+  if (page < 2) page++;
+  updatePages();
+};
+</script>
+
+</body>
+</html>
